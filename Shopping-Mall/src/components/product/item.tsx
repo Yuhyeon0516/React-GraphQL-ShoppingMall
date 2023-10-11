@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { ProductItemType } from '../../types/types';
+import { ProdcutItemText, ProductItemColumn, ProductItemContainer, ProductItemImage, ProductItemTextContainer, ProductItemTextType } from './styles';
 /*
     id: 58
     title: "Practical Granite Car"
@@ -19,15 +20,35 @@ import { ProductItemType } from '../../types/types';
         updatedAt: "2023-10-11T03:24:10.000Z"
     */
 
-export default function ProductItem({ id, title, price, description, images, creationAt, updatedAt, category }: ProductItemType) {
+export default function ProductItem({ title, price, images, creationAt, category }: ProductItemType) {
     return (
-        <li>
-            <p>{category.name}</p>
-            <p>{title}</p>
+        <ProductItemContainer>
+            <ProductItemImage src={images[0] ?? 'https://avatars.githubusercontent.com/u/120432007?v=4'} alt="image" />
+            <ProductItemTextContainer>
+                <ProductItemColumn>
+                    <ProductItemTextType>Category :</ProductItemTextType>&emsp;
+                    <ProdcutItemText>{category.name}</ProdcutItemText>
+                </ProductItemColumn>
+
+                <ProductItemColumn>
+                    <ProductItemTextType>Product Name :</ProductItemTextType>&emsp;
+                    <ProdcutItemText>{title}</ProdcutItemText>
+                </ProductItemColumn>
+
+                <ProductItemColumn>
+                    <ProductItemTextType>Price :</ProductItemTextType>&emsp;
+                    <ProdcutItemText>$ {price}</ProdcutItemText>
+                </ProductItemColumn>
+
+                <ProductItemColumn>
+                    <ProductItemTextType>Create :</ProductItemTextType>&emsp;
+                    <ProdcutItemText>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</ProdcutItemText>
+                </ProductItemColumn>
+            </ProductItemTextContainer>
+            {/* 
             <p>{description}</p>
-            <img src={images[0] ?? 'https://avatars.githubusercontent.com/u/120432007?v=4'} alt="image" />
             <p>${price}</p>
-            <p>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</p>
-        </li>
+            <p>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</p> */}
+        </ProductItemContainer>
     );
 }
