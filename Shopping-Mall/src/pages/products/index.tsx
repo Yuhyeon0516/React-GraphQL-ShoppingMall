@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { QueryKeys, fetcher } from '../../utils/queryClient';
 import { ProductItemType } from '../../types/types';
 import ProductItem from '../../components/product/item';
+import { ProductListContainer } from '../../components/product/styles';
 
 export default function ProductList() {
     const { data } = useQuery<ProductItemType[]>(QueryKeys.PRODUCTS, () => fetcher({ method: 'GET', path: '/products' }));
@@ -26,12 +27,10 @@ export default function ProductList() {
     */
 
     return (
-        <div>
-            <ul>
-                {data?.map((product) => (
-                    <ProductItem {...product} key={product.id} />
-                ))}
-            </ul>
-        </div>
+        <ProductListContainer>
+            {data?.map((product) => (
+                <ProductItem {...product} key={product.id} />
+            ))}
+        </ProductListContainer>
     );
 }
