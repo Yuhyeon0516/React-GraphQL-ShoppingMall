@@ -4,6 +4,12 @@ import reactRouterPlugin from 'vite-plugin-next-react-router';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    server: {
+        port: 3000,
+    },
+    preview: {
+        port: 3001,
+    },
     plugins: [
         react(),
         reactRouterPlugin({
