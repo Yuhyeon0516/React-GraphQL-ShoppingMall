@@ -4,5 +4,12 @@ import reactRouterPlugin from 'vite-plugin-next-react-router';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react(), reactRouterPlugin()],
+    plugins: [
+        react(),
+        reactRouterPlugin({
+            pageDir: 'src/pages',
+            extensions: ['js', 'jsx', 'ts', 'tsx'],
+            layout: '_layout',
+        }),
+    ],
 });
