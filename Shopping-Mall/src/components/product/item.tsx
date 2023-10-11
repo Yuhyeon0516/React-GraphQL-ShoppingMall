@@ -1,12 +1,6 @@
-import { useQuery } from 'react-query';
-import { QueryKeys, fetcher } from '../../utils/queryClient';
+import moment from 'moment';
 import { ProductItemType } from '../../types/types';
-import ProductItem from '../../components/product/item';
-
-export default function ProductList() {
-    const { data } = useQuery<ProductItemType[]>(QueryKeys.PRODUCTS, () => fetcher({ method: 'GET', path: '/products' }));
-
-    /*
+/*
     id: 58
     title: "Practical Granite Car"
     price: 240
@@ -25,13 +19,15 @@ export default function ProductList() {
         updatedAt: "2023-10-11T03:24:10.000Z"
     */
 
+export default function ProductItem({ id, title, price, description, images, creationAt, updatedAt, category }: ProductItemType) {
     return (
-        <div>
-            <ul>
-                {data?.map((product) => (
-                    <ProductItem {...product} key={product.id} />
-                ))}
-            </ul>
-        </div>
+        <li>
+            <p>{category.name}</p>
+            <p>{title}</p>
+            <p>{description}</p>
+            <img src={images[0] ?? 'https://avatars.githubusercontent.com/u/120432007?v=4'} alt="image" />
+            <p>${price}</p>
+            <p>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</p>
+        </li>
     );
 }
