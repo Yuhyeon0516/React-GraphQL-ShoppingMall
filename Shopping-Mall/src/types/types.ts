@@ -9,21 +9,15 @@ export interface FetcherPropsType {
     params?: AnyOBJ;
 }
 
-interface ProductCategory {
-    id: number;
-    name: string;
-    image: string;
-    creationAt: Date;
-    updatedAt: Date;
+export interface Product {
+    id: string;
+    imageUrl: string;
+    price: number;
+    title: string;
+    description: string;
+    createdAt: string;
 }
 
-export interface ProductItemType {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    images: string[];
-    creationAt: Date;
-    updatedAt: Date;
-    category: ProductCategory;
+export interface Products {
+    products: Product[];
 }

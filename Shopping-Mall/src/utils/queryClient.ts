@@ -1,5 +1,6 @@
 import { QueryClient } from 'react-query';
 import { FetcherPropsType } from '../types/types';
+import request, { RequestDocument } from 'graphql-request';
 
 export const getClient = (() => {
     let client: QueryClient | null = null;
@@ -47,6 +48,12 @@ export async function fetcher({ method, path, body, params }: FetcherPropsType) 
     } catch (error) {
         console.log(error);
     }
+}
+
+const GRAPHQL_BASE_URL = '/';
+
+export async function graphqlFetcher<T>(query: RequestDocument, variables = {}) {
+    return request<T>(GRAPHQL_BASE_URL, query, variables);
 }
 
 export const QueryKeys = {
