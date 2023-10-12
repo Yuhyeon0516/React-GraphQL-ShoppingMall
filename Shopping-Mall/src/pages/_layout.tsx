@@ -3,6 +3,7 @@ import { QueryClientProvider } from 'react-query';
 import { Outlet } from 'react-router-dom';
 import { getClient } from '../utils/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import Gnb from '../components/gnb';
 
 const Layout: React.FC = () => {
     const client = getClient();
@@ -10,6 +11,7 @@ const Layout: React.FC = () => {
     return (
         <QueryClientProvider client={client}>
             <ReactQueryDevtools initialIsOpen={false} />
+            <Gnb />
             <Suspense fallback={'loading....'}>
                 <Outlet />
             </Suspense>
