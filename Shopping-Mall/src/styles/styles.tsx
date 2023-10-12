@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Common
 
 export const StyledLink = styled(Link)`
     text-decoration: none;
     color: black;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 
     &:focus,
     &:hover,
@@ -39,6 +43,7 @@ export const ProductItemContainer = styled.div`
     flex-direction: column;
     flex: 1;
     padding: 10px;
+    position: relative;
 `;
 
 export const ProductItemImage = styled.img`
@@ -131,4 +136,15 @@ export const ProductDetailText = styled.span`
     margin-top: 10px;
     width: 70%;
     margin-bottom: 60px;
+`;
+
+// Cart
+export const CartButtonIcon = styled(FontAwesomeIcon)`
+    color: #65ceb0;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
 `;
