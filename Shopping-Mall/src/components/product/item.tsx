@@ -1,6 +1,16 @@
 import moment from 'moment';
 import { ProductItemType } from '../../types/types';
-import { ProdcutItemText, ProductItemColumn, ProductItemContainer, ProductItemImage, ProductItemTextContainer, ProductItemTextType } from './styles';
+import {
+    FloatingButton,
+    ProdcutItemText,
+    ProductItemColumn,
+    ProductItemContainer,
+    ProductItemImage,
+    ProductItemTextContainer,
+    ProductItemTextType,
+} from './styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 /*
     id: 58
     title: "Practical Granite Car"
@@ -45,10 +55,9 @@ export default function ProductItem({ title, price, images, creationAt, category
                     <ProdcutItemText>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</ProdcutItemText>
                 </ProductItemColumn>
             </ProductItemTextContainer>
-            {/* 
-            <p>{description}</p>
-            <p>${price}</p>
-            <p>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</p> */}
+            <FloatingButton>
+                <FontAwesomeIcon icon={faPlus} fontSize={18} color="white" />
+            </FloatingButton>
         </ProductItemContainer>
     );
 }
