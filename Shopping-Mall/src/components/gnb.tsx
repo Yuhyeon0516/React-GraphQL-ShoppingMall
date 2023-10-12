@@ -13,6 +13,9 @@ export default function Gnb() {
                 <li>
                     <StyledLink to={'/cart'}>장바구니</StyledLink>
                 </li>
+                <li>
+                    <StyledLink to={'/payment'}>결제</StyledLink>
+                </li>
             </ul>
         </nav>
     );
