@@ -1,8 +1,9 @@
 import { graphql } from 'msw';
-import GET_PRODUCTS, { PRODUCT } from '../graphql/products';
+import { GET_PRODUCT, GET_PRODUCTS } from '../graphql/products';
 import { v4 } from 'uuid';
+import { Product } from '../types/types';
 
-const mockProducts: PRODUCT[] = Array.from({ length: 20 }).map((_, index) => ({
+const mockProducts: Product[] = Array.from({ length: 20 }).map((_, index) => ({
     id: v4(),
     imageUrl: `https://loremflickr.com/300/300/${index + 1}`,
     price: 5000,
@@ -18,5 +19,9 @@ export const handlers = [
                 products: mockProducts,
             }),
         );
+    }),
+
+    graphql.query(GET_PRODUCT, (_, res, ctx) => {
+        return res(ctx.data(mockProducts[0]));
     }),
 ];
