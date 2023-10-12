@@ -2,7 +2,9 @@ import { useQuery } from 'react-query';
 import { QueryKeys, fetcher } from '../../utils/queryClient';
 import { ProductItemType } from '../../types/types';
 import ProductItem from '../../components/product/item';
-import { ProductListContainer } from '../../components/product/styles';
+import { FloatingButton, ProductListContainer } from '../../components/product/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductList() {
     const { data } = useQuery<ProductItemType[]>(QueryKeys.PRODUCTS, () => fetcher({ method: 'GET', path: '/products' }));
@@ -31,6 +33,9 @@ export default function ProductList() {
             {data?.map((product) => (
                 <ProductItem {...product} key={product.id} />
             ))}
+            <FloatingButton>
+                <FontAwesomeIcon icon={faPlus} fontSize={18} color="white" />
+            </FloatingButton>
         </ProductListContainer>
     );
 }

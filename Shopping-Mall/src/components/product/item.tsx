@@ -1,16 +1,14 @@
 import moment from 'moment';
 import { ProductItemType } from '../../types/types';
 import {
-    FloatingButton,
     ProdcutItemText,
     ProductItemColumn,
     ProductItemContainer,
     ProductItemImage,
     ProductItemTextContainer,
     ProductItemTextType,
+    StyledLink,
 } from './styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 /*
     id: 58
     title: "Practical Granite Car"
@@ -30,34 +28,33 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
         updatedAt: "2023-10-11T03:24:10.000Z"
     */
 
-export default function ProductItem({ title, price, images, creationAt, category }: ProductItemType) {
+export default function ProductItem({ id, title, price, images, creationAt, category }: ProductItemType) {
     return (
-        <ProductItemContainer>
-            <ProductItemImage src={images[0] ?? 'https://avatars.githubusercontent.com/u/120432007?v=4'} alt="image" />
-            <ProductItemTextContainer>
-                <ProductItemColumn>
-                    <ProductItemTextType>Category :</ProductItemTextType>&emsp;
-                    <ProdcutItemText>{category.name}</ProdcutItemText>
-                </ProductItemColumn>
+        <StyledLink to={`/products/${id}`}>
+            <ProductItemContainer>
+                <ProductItemImage src={images[0] ?? 'https://avatars.githubusercontent.com/u/120432007?v=4'} alt="image" />
+                <ProductItemTextContainer>
+                    <ProductItemColumn>
+                        <ProductItemTextType>Category :</ProductItemTextType>&emsp;
+                        <ProdcutItemText>{category.name}</ProdcutItemText>
+                    </ProductItemColumn>
 
-                <ProductItemColumn>
-                    <ProductItemTextType>Product Name :</ProductItemTextType>&emsp;
-                    <ProdcutItemText>{title}</ProdcutItemText>
-                </ProductItemColumn>
+                    <ProductItemColumn>
+                        <ProductItemTextType>Product Name :</ProductItemTextType>&emsp;
+                        <ProdcutItemText>{title}</ProdcutItemText>
+                    </ProductItemColumn>
 
-                <ProductItemColumn>
-                    <ProductItemTextType>Price :</ProductItemTextType>&emsp;
-                    <ProdcutItemText>$ {price}</ProdcutItemText>
-                </ProductItemColumn>
+                    <ProductItemColumn>
+                        <ProductItemTextType>Price :</ProductItemTextType>&emsp;
+                        <ProdcutItemText>$ {price}</ProdcutItemText>
+                    </ProductItemColumn>
 
-                <ProductItemColumn>
-                    <ProductItemTextType>Create :</ProductItemTextType>&emsp;
-                    <ProdcutItemText>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</ProdcutItemText>
-                </ProductItemColumn>
-            </ProductItemTextContainer>
-            <FloatingButton>
-                <FontAwesomeIcon icon={faPlus} fontSize={18} color="white" />
-            </FloatingButton>
-        </ProductItemContainer>
+                    <ProductItemColumn>
+                        <ProductItemTextType>Create :</ProductItemTextType>&emsp;
+                        <ProdcutItemText>{moment(creationAt).format('YYYY/MM/DD hh:mm:ss').toString()}</ProdcutItemText>
+                    </ProductItemColumn>
+                </ProductItemTextContainer>
+            </ProductItemContainer>
+        </StyledLink>
     );
 }

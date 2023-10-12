@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ProductListContainer = styled.div`
@@ -72,4 +73,17 @@ export const FloatingButton = styled.button`
     right: 20px;
     bottom: 20px;
     cursor: pointer;
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
 `;
