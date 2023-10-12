@@ -97,6 +97,16 @@ export const FloatingButton = styled.button`
     cursor: pointer;
 `;
 
+export const AddCartButtonIcon = styled(FontAwesomeIcon)`
+    color: #65ceb0;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+`;
+
 // Product Detail Page
 
 export const ProductDetailContainer = styled.div`
@@ -139,12 +149,44 @@ export const ProductDetailText = styled.span`
 `;
 
 // Cart
-export const CartButtonIcon = styled(FontAwesomeIcon)`
-    color: #65ceb0;
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    right: 10px;
-    bottom: 10px;
-    cursor: pointer;
+
+export const CartContainer = styled.div`
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 15px;
+`;
+
+export const CartItemContainer = styled.div`
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    width: 50vw;
+    flex-direction: row;
+    border: 3px solid #65ceb0;
+    border-radius: 20px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const CartItemImage = styled.img`
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    margin-left: 10px;
+`;
+
+export const CartItemTextContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px;
+    gap: 10px;
+`;
+
+export const CartItemType = styled.div`
+    font-size: 24px;
+    font-weight: bold;
 `;
