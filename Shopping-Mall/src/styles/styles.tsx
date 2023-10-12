@@ -109,19 +109,26 @@ export const ProductDetailImage = styled.img`
     overflow: hidden;
     height: 90vh;
     align-self: center;
+    flex: 1;
 `;
 
 export const ProductDetailTextContainer = styled.div`
     flex: 1;
-    background-color: red;
     height: 90vh;
     align-self: center;
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
+    margin-left: 30px;
+    justify-content: center;
 `;
 
-export const ProductDetailTextType = styled.h2`
+export const ProductDetailTextType = styled.h1`
     margin: 0;
+`;
+
+export const ProductDetailText = styled.span`
     font-size: 20px;
+    margin-top: 10px;
+    width: 70%;
+    margin-bottom: 60px;
 `;
