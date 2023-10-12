@@ -21,3 +21,11 @@ export interface Product {
 export interface Products {
     products: Product[];
 }
+
+export interface Cart {
+    id: string;
+    imageUrl: string;
+    price: number;
+    title: string;
+    amount: number;
+}
