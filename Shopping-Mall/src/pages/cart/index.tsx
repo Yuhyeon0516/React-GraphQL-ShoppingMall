@@ -5,20 +5,19 @@ import { Cart } from '../../types/types';
 import CartItem from '../../components/cart/item';
 
 export default function CartPage() {
-    const { data } = useQuery<{ [key: string]: Cart }>(QueryKeys.CART, () => graphqlFetcher<{ [key: string]: Cart }>(GET_CART));
-
-    console.log(data);
+    const { data } = useQuery<{ [key: string]: Cart }>(QueryKeys.CART, () => graphqlFetcher<{ [key: string]: Cart }>(GET_CART), {
+        staleTime: 0,
+        cacheTime: 1000,
+    });
 
     if (!data) return '장바구니가 비었어요';
 
     const cartItems = Object.values(data);
 
-    console.log(cartItems);
-
     return (
         <ul>
             {cartItems.map((item, index) => (
-                <CartItem item={item} key={index} />
+                <CartItem {...item} key={index} />
             ))}
         </ul>
     );
