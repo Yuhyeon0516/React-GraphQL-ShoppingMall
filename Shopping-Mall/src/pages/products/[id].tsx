@@ -7,7 +7,7 @@ import { GET_PRODUCT } from '../../graphql/products';
 
 export default function ProductDetailPage() {
     const { id } = useParams();
-    const { data } = useQuery<Product>([QueryKeys.PRODUCTS, id], () => graphqlFetcher<Product>(GET_PRODUCT));
+    const { data } = useQuery<Product>([QueryKeys.PRODUCTS, id], () => graphqlFetcher<Product>(GET_PRODUCT, { id }));
 
     if (!data) return null;
 
