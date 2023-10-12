@@ -9,6 +9,10 @@ export const getClient = (() => {
                 defaultOptions: {
                     queries: {
                         refetchOnWindowFocus: false,
+                        refetchOnMount: false,
+                        refetchOnReconnect: false,
+                        cacheTime: 1000 * 60 * 60 * 24,
+                        staleTime: 1000 * 60,
                     },
                 },
             });
@@ -20,7 +24,7 @@ const BASE_URL = 'https://api.escuelajs.co/api/v1';
 
 export async function fetcher({ method, path, body, params }: FetcherPropsType) {
     try {
-        const url = `${BASE_URL}${path}`;
+        let url = `${BASE_URL}${path}`;
         const fetchOptions: RequestInit = {
             method,
             headers: {
@@ -28,6 +32,14 @@ export async function fetcher({ method, path, body, params }: FetcherPropsType) 
                 'Access-Control-Allow-Origin': BASE_URL,
             },
         };
+
+        if (params) {
+            const searchParams = new URLSearchParams(params);
+            url += searchParams.toString();
+        }
+
+        if (body) fetchOptions.body = JSON.stringify(body);
+
         const res = await fetch(url, fetchOptions);
         const json = await res.json();
 
