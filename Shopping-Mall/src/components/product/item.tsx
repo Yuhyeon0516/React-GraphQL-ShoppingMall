@@ -1,5 +1,6 @@
 import moment from 'moment';
 import {
+    CartButtonIcon,
     ProdcutItemText,
     ProductItemColumn,
     ProductItemContainer,
@@ -10,28 +11,33 @@ import {
 } from '../../styles/styles';
 import { Product } from '../../types/types';
 
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
 export default function ProductItem({ id, title, price, imageUrl, createdAt }: Product) {
     return (
-        <StyledLink to={`/products/${id}`}>
+        <div>
             <ProductItemContainer>
-                <ProductItemImage src={imageUrl} alt="image" />
-                <ProductItemTextContainer>
-                    <ProductItemColumn>
-                        <ProductItemTextType>Product Name :</ProductItemTextType>&emsp;
-                        <ProdcutItemText>{title}</ProdcutItemText>
-                    </ProductItemColumn>
+                <StyledLink to={`/products/${id}`}>
+                    <ProductItemImage src={imageUrl} alt="image" />
+                    <ProductItemTextContainer>
+                        <ProductItemColumn>
+                            <ProductItemTextType>Product Name :</ProductItemTextType>&emsp;
+                            <ProdcutItemText>{title}</ProdcutItemText>
+                        </ProductItemColumn>
 
-                    <ProductItemColumn>
-                        <ProductItemTextType>Price :</ProductItemTextType>&emsp;
-                        <ProdcutItemText>$ {price}</ProdcutItemText>
-                    </ProductItemColumn>
+                        <ProductItemColumn>
+                            <ProductItemTextType>Price :</ProductItemTextType>&emsp;
+                            <ProdcutItemText>$ {price}</ProdcutItemText>
+                        </ProductItemColumn>
 
-                    <ProductItemColumn>
-                        <ProductItemTextType>Create :</ProductItemTextType>&emsp;
-                        <ProdcutItemText>{moment(createdAt).format('YYYY/MM/DD hh:mm:ss').toString()}</ProdcutItemText>
-                    </ProductItemColumn>
-                </ProductItemTextContainer>
+                        <ProductItemColumn>
+                            <ProductItemTextType>Create :</ProductItemTextType>&emsp;
+                            <ProdcutItemText>{moment(createdAt).format('YYYY/MM/DD hh:mm:ss').toString()}</ProdcutItemText>
+                        </ProductItemColumn>
+                    </ProductItemTextContainer>
+                </StyledLink>
+                <CartButtonIcon icon={faCartShopping} onClick={() => console.log('click')} />
             </ProductItemContainer>
-        </StyledLink>
+        </div>
     );
 }
