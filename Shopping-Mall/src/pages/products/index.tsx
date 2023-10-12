@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { QueryKeys, fetcher } from '../../utils/queryClient';
 import { ProductItemType } from '../../types/types';
 import ProductItem from '../../components/product/item';
-import { FloatingButton, ProductListContainer } from '../../components/product/styles';
+import { FloatingButton, ProductListContainer } from '../../styles/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 

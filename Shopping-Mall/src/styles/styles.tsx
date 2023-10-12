@@ -1,6 +1,23 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// Common
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
+// Product List Page
+
 export const ProductListContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -75,15 +92,36 @@ export const FloatingButton = styled.button`
     cursor: pointer;
 `;
 
-export const StyledLink = styled(Link)`
-    text-decoration: none;
-    color: black;
+// Product Detail Page
 
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-        text-decoration: none;
-    }
+export const ProductDetailContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+`;
+
+export const ProductDetailImage = styled.img`
+    border-radius: 20px;
+    overflow: hidden;
+    height: 90vh;
+    align-self: center;
+`;
+
+export const ProductDetailTextContainer = styled.div`
+    flex: 1;
+    background-color: red;
+    height: 90vh;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+`;
+
+export const ProductDetailTextType = styled.h2`
+    margin: 0;
+    font-size: 20px;
 `;

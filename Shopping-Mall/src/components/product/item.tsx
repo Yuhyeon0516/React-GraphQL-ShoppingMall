@@ -8,7 +8,7 @@ import {
     ProductItemTextContainer,
     ProductItemTextType,
     StyledLink,
-} from './styles';
+} from '../../styles/styles';
 /*
     id: 58
     title: "Practical Granite Car"
