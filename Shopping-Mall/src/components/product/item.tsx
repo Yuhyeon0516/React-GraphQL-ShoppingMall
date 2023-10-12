@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {
-    CartButtonIcon,
+    AddCartButtonIcon,
     ProdcutItemText,
     ProductItemColumn,
     ProductItemContainer,
@@ -38,7 +38,7 @@ export default function ProductItem({ id, title, price, imageUrl, createdAt }: P
                     </ProductItemColumn>
                 </ProductItemTextContainer>
             </StyledLink>
-            <CartButtonIcon icon={faCartShopping} onClick={() => addCart(id)} />
+            <AddCartButtonIcon icon={faCartShopping} onClick={() => addCart(id)} />
         </ProductItemContainer>
     );
 }
