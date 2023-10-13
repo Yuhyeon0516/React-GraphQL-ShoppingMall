@@ -18,9 +18,8 @@ export default function CartPage() {
     return (
         <CartContainer>
             <h1>장바구니</h1>
-            {cartItems.map((item, index) => (
-                <CartItem {...item} key={index} />
-            ))}
+
+            {cartItems.length ? cartItems.map((item, index) => <CartItem {...item} key={index} />) : <h1>장바구니에 담긴 항목이 없습니다.</h1>}
         </CartContainer>
     );
 }
