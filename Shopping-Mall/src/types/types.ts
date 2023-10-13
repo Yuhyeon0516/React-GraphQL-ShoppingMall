@@ -29,3 +29,9 @@ export interface Cart {
     title: string;
     amount: number;
 }
+
+export interface PayInfo {
+    id: string;
+}
+
+export type Paymentinfos = PayInfo[];

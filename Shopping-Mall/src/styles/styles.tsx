@@ -229,3 +229,12 @@ export const PaymentWillPayContainer = styled.div`
     align-items: center;
     gap: 20px;
 `;
+
+export const ShowModalButton = styled.button`
+    background-color: #65ceb0;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 15px;
+    margin-left: 15px;
+`;
