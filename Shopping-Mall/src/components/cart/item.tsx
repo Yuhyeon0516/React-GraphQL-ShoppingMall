@@ -2,11 +2,11 @@ import { useMutation } from 'react-query';
 import { Cart } from '../../types/types';
 import { DELETE_CART, UPDATE_CART } from '../../graphql/cart';
 import { QueryKeys, getClient, graphqlFetcher } from '../../utils/queryClient';
-import { SyntheticEvent } from 'react';
+import { ForwardedRef, SyntheticEvent, forwardRef } from 'react';
 import { CartItemContainer, CartItemImage, CartItemRemoveIcon, CartItemTextContainer, CartItemType } from '../../styles/styles';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
+function CartItem({ id, title, price, amount, imageUrl }: Cart, ref: ForwardedRef<HTMLInputElement>) {
     const queryClient = getClient();
     const { mutate: updateCart } = useMutation(({ id, amount }: { id: string; amount: number }) => graphqlFetcher(UPDATE_CART, { id, amount }));
     const { mutate: deleteCart } = useMutation(({ id }: { id: string }) => graphqlFetcher(DELETE_CART, { id }));
@@ -37,7 +37,7 @@ export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
 
     return (
         <CartItemContainer>
-            <input type="checkbox" name={`select-item`} className="cart-item__checkbox" />
+            <input type="checkbox" name={`select-item`} className="cart-item__checkbox" ref={ref} />
             <CartItemImage src={imageUrl} alt="image" />
             <CartItemTextContainer>
                 <CartItemType>상품명</CartItemType>
@@ -63,3 +63,5 @@ export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
         </CartItemContainer>
     );
 }
+
+export default forwardRef(CartItem);
