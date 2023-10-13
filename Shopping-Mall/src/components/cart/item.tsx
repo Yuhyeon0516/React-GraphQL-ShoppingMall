@@ -13,6 +13,7 @@ export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
 
     function handleUpdateAmount(e: SyntheticEvent) {
         const value = Number((e.target as HTMLInputElement).value);
+        if (amount < 1) return;
         updateCart(
             { id, amount: value },
             {
@@ -50,7 +51,7 @@ export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
 
             <CartItemTextContainer>
                 <CartItemType>개수</CartItemType>
-                <input type="number" value={amount} onChange={handleUpdateAmount} />
+                <input type="number" value={amount} onChange={handleUpdateAmount} min={1} />
             </CartItemTextContainer>
 
             <CartItemTextContainer>
