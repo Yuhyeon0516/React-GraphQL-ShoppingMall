@@ -169,6 +169,8 @@ export const CartItemContainer = styled.div`
     overflow: hidden;
     align-items: center;
     justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
 `;
 
 export const CartItemImage = styled.img`

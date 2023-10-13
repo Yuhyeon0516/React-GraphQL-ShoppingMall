@@ -37,7 +37,7 @@ export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
 
     return (
         <CartItemContainer>
-            <input type="checkbox" />
+            <input type="checkbox" name={`select-item`} className="cart-item__checkbox" />
             <CartItemImage src={imageUrl} alt="image" />
             <CartItemTextContainer>
                 <CartItemType>상품명</CartItemType>
