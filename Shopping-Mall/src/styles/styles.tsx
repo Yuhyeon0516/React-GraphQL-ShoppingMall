@@ -162,7 +162,7 @@ export const CartItemContainer = styled.div`
     padding-top: 10px;
     padding-bottom: 10px;
     display: flex;
-    width: 50vw;
+    width: 55vw;
     flex-direction: row;
     border: 3px solid #65ceb0;
     border-radius: 20px;
@@ -175,7 +175,6 @@ export const CartItemImage = styled.img`
     width: 150px;
     height: 150px;
     border-radius: 20px;
-    margin-left: 10px;
 `;
 
 export const CartItemTextContainer = styled.div`
@@ -189,4 +188,12 @@ export const CartItemTextContainer = styled.div`
 export const CartItemType = styled.div`
     font-size: 24px;
     font-weight: bold;
+`;
+
+export const CartItemRemoveIcon = styled(FontAwesomeIcon)`
+    color: red;
+    margin: 20px;
+    align-self: center;
+    width: 30px;
+    height: 30px;
 `;

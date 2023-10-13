@@ -3,7 +3,8 @@ import { Cart } from '../../types/types';
 import { UPDATE_CART } from '../../graphql/cart';
 import { QueryKeys, getClient, graphqlFetcher } from '../../utils/queryClient';
 import { SyntheticEvent } from 'react';
-import { CartItemContainer, CartItemImage, CartItemTextContainer, CartItemType } from '../../styles/styles';
+import { CartItemContainer, CartItemImage, CartItemRemoveIcon, CartItemTextContainer, CartItemType } from '../../styles/styles';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
     const queryClient = getClient();
@@ -23,6 +24,7 @@ export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
 
     return (
         <CartItemContainer>
+            <input type="checkbox" />
             <CartItemImage src={imageUrl} alt="image" />
             <CartItemTextContainer>
                 <CartItemType>상품명</CartItemType>
@@ -43,6 +45,8 @@ export default function CartItem({ id, title, price, amount, imageUrl }: Cart) {
                 <CartItemType>합계</CartItemType>
                 <div>$ {price * amount}</div>
             </CartItemTextContainer>
+
+            <CartItemRemoveIcon icon={faTrashCan} />
         </CartItemContainer>
     );
 }
