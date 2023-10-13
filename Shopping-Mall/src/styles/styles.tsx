@@ -199,3 +199,22 @@ export const CartItemRemoveIcon = styled(FontAwesomeIcon)`
     width: 30px;
     height: 30px;
 `;
+
+export const MoveToPaymentButton = styled(Link)`
+    background-color: #65ceb0;
+
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 15px;
+    margin-left: 15px;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
+`;
