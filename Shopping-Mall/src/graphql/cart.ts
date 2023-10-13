@@ -29,3 +29,13 @@ export const UPDATE_CART = gql`
         ammount
     }
 `;
+
+export const DELETE_CART = gql`
+    mutation DELETE_CART($id: string) {
+        id
+        imageUrl
+        price
+        title
+        ammount
+    }
+`;

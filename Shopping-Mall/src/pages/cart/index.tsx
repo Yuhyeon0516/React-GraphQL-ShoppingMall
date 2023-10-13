@@ -19,7 +19,19 @@ export default function CartPage() {
         <CartContainer>
             <h1>장바구니</h1>
 
-            {cartItems.length ? cartItems.map((item, index) => <CartItem {...item} key={index} />) : <h1>장바구니에 담긴 항목이 없습니다.</h1>}
+            {cartItems.length ? (
+                <>
+                    <label>
+                        <input type="checkbox" />
+                        전체 선택
+                    </label>
+                    {cartItems.map((item, index) => (
+                        <CartItem {...item} key={index} />
+                    ))}
+                </>
+            ) : (
+                <h1>장바구니에 담긴 항목이 없습니다.</h1>
+            )}
         </CartContainer>
     );
 }
