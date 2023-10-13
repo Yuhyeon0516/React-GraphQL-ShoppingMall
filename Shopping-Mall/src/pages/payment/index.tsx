@@ -1,3 +1,5 @@
-export default function Payment() {
-    return <div>결제</div>;
+import Payment from '../../components/payment';
+
+export default function PaymentPage() {
+    return <Payment />;
 }

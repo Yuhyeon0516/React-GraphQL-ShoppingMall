@@ -1,6 +1,6 @@
 import { Cart } from '../../types/types';
 import CartItem from '../../components/cart/item';
-import { CartContainer, MoveToPaymentButton } from '../../styles/styles';
+import { CartContainer, LinkColorButton } from '../../styles/styles';
 import { SyntheticEvent, createRef, useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { checkedCartState } from '../../recoil/cart';
@@ -52,7 +52,7 @@ export default function CartList({ cartItems }: { cartItems: Cart[] }) {
                         <input className="select-all" name="select-all" type="checkbox" />
                         전체 선택
                     </label>
-                    <MoveToPaymentButton to={'/payment'}>결제</MoveToPaymentButton>
+                    <LinkColorButton to={'/payment'}>결제</LinkColorButton>
                     {cartItems.map((item, index) => (
                         <CartItem {...item} key={index} ref={checkboxRefs[index]} />
                     ))}

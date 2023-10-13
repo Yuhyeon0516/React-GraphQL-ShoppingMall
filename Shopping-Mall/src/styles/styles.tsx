@@ -200,7 +200,7 @@ export const CartItemRemoveIcon = styled(FontAwesomeIcon)`
     height: 30px;
 `;
 
-export const MoveToPaymentButton = styled(Link)`
+export const LinkColorButton = styled(Link)`
     background-color: #65ceb0;
 
     text-decoration: none;
@@ -217,4 +217,15 @@ export const MoveToPaymentButton = styled(Link)`
     &:active {
         text-decoration: none;
     }
+`;
+
+// payment
+
+export const PaymentWillPayContainer = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    margin-left: 20px;
+    align-items: center;
+    gap: 20px;
 `;
