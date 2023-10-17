@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from 'react-query';
 import { QueryKeys, graphqlFetcher } from '../../utils/queryClient';
-import ProductItem from '../../components/product/item';
 import { FloatingButton, ProductListContainer } from '../../styles/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +7,8 @@ import { GET_PRODUCTS } from '../../graphql/products';
 import { Products } from '../../types/types';
 import { useEffect, useRef } from 'react';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
+import AdminItem from '../../components/admin/item';
+import AddForm from '../../components/admin/addForm';
 
 export default function AdminPage() {
     const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery<Products>(
@@ -37,10 +38,11 @@ export default function AdminPage() {
     return (
         <>
             <h1>어드민</h1>
+            <AddForm />
             <ProductListContainer>
                 {data?.pages.map((page) =>
                     page.products.map((product) => {
-                        return <ProductItem {...product} key={product.id} />;
+                        return <AdminItem {...product} key={product.id} />;
                     }),
                 )}
                 <FloatingButton>

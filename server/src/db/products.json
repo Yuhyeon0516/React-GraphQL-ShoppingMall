@@ -484,5 +484,53 @@
         "title": "임시 상품 61",
         "description": "임시 상세 내용 61",
         "imageUrl": "https://loremflickr.com/300/300/61"
+    },
+    {
+        "id": "225ad3b7-45d8-4eda-bcf1-04fe3abefc6b",
+        "price": 50000,
+        "title": "상품2",
+        "description": "너",
+        "imageUrl": "https://avatars.githubusercontent.com/u/120432007?v=4",
+        "createdAt": 1697544186125
+    },
+    {
+        "id": "b8f040a9-0fd6-49ce-8737-136d1b82d8f5",
+        "price": 55555,
+        "title": "dsadas",
+        "description": "1231231",
+        "imageUrl": "https://avatars.githubusercontent.com/u/120432007?v=4",
+        "createdAt": 1697544348882
+    },
+    {
+        "id": "5a289a4a-d824-42f3-b38a-65427c8c0684",
+        "price": 55555,
+        "title": "dsadas",
+        "description": "1231231",
+        "imageUrl": "https://avatars.githubusercontent.com/u/120432007?v=4",
+        "createdAt": 1697544355004
+    },
+    {
+        "id": "002f6c05-0ddc-42be-8d3f-872e22f5ccd2",
+        "price": 55555,
+        "title": "dsadas",
+        "description": "1231231",
+        "imageUrl": "https://avatars.githubusercontent.com/u/120432007?v=4",
+        "createdAt": 1697544355777
+    },
+    {
+        "id": "8b30ff39-549a-47a8-800d-811bfc4ecd59",
+        "price": 55555,
+        "title": "dsadas",
+        "description": "1231231",
+        "imageUrl": "https://avatars.githubusercontent.com/u/120432007?v=4",
+        "createdAt": 1697544356229
+    },
+    {
+        "id": "8645624e-a5f9-42ea-9b59-97eb9a7100fb",
+        "price": 5500,
+        "title": "이츠미",
+        "description": "테스트",
+        "imageUrl": "https://loremflickr.com/300/300/99",
+        "createdAt": 1697544678277
     }
 ]
