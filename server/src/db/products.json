@@ -478,5 +478,12 @@
         "imageUrl": "https://loremflickr.com/300/300/20",
         "price": 5000,
         "title": "임시 상품 60"
+    },
+    {
+        "id": "f50fa868-06bc-4200-a73d-31d8e2862524",
+        "price": 5000,
+        "title": "임시 상품 61",
+        "description": "임시 상세 내용 61",
+        "imageUrl": "https://loremflickr.com/300/300/61"
     }
 ]
