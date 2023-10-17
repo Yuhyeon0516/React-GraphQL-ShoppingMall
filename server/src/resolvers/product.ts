@@ -7,7 +7,7 @@ const mockProducts = (() =>
         price: 5000,
         title: `임시 상품 ${index + 1}`,
         description: `임시 상세 내용 ${index + 1}`,
-        createdAt: new Date(1697096204492 + index * 1000 * 60 * 60 * 24).toString(),
+        createdAt: new Date(1697096204492 + index * 1000 * 60 * 60 * 24),
     })))();
 
 const productResolver: Resolver = {
