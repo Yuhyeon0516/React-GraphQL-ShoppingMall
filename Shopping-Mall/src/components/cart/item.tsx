@@ -6,7 +6,7 @@ import { ForwardedRef, SyntheticEvent, forwardRef } from 'react';
 import { CartItemContainer, CartItemImage, CartItemRemoveIcon, CartItemTextContainer, CartItemType } from '../../styles/styles';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-function CartItem({ id, amount, product: { title, price, imageUrl } }: Cart, ref: ForwardedRef<HTMLInputElement>) {
+function CartItem({ id, amount, product: { title, price, imageUrl, createdAt } }: Cart, ref: ForwardedRef<HTMLInputElement>) {
     const queryClient = getClient();
     const { mutate: updateCart } = useMutation(({ id, amount }: { id: string; amount: number }) => graphqlFetcher(UPDATE_CART, { id, amount }));
     const { mutate: deleteCart } = useMutation(({ id }: { id: string }) => graphqlFetcher(DELETE_CART, { id }));
@@ -55,7 +55,10 @@ function CartItem({ id, amount, product: { title, price, imageUrl } }: Cart, ref
 
     return (
         <CartItemContainer>
-            <input type="checkbox" name={`select-item`} className="cart-item__checkbox" ref={ref} />
+            {/* <div style={{ display: 'flex', width: 40, height: 40, alignItems: 'center', justifyContent: 'center' }}>
+                {createdAt ? <input type="checkbox" name={`select-item`} className="cart-item__checkbox" ref={ref} /> : null}
+            </div> */}
+            <input type="checkbox" name={`select-item`} className="cart-item__checkbox" ref={ref} disabled={createdAt === null} />
             <CartItemImage src={imageUrl} alt="image" />
             <CartItemTextContainer>
                 <CartItemType>상품명</CartItemType>
@@ -69,7 +72,11 @@ function CartItem({ id, amount, product: { title, price, imageUrl } }: Cart, ref
 
             <CartItemTextContainer>
                 <CartItemType>개수</CartItemType>
-                <input type="number" value={amount} onChange={handleUpdateAmount} min={1} />
+                {createdAt ? (
+                    <input type="number" value={amount} onChange={handleUpdateAmount} min={1} />
+                ) : (
+                    <div style={{ color: 'red', fontWeight: 'bold' }}>판매중지 된 상품입니다.</div>
+                )}
             </CartItemTextContainer>
 
             <CartItemTextContainer>

@@ -1,11 +1,10 @@
 [
     {
-        "createdAt": 1697096204492,
         "description": "임시 상세 내용 1",
         "id": "1",
         "imageUrl": "https://loremflickr.com/300/300/1",
-        "price": 7000,
-        "title": "임시 상품 1231"
+        "price": 5000,
+        "title": "임시 상품 1"
     },
     {
         "description": "임시 상세 내용 2",
@@ -15,7 +14,6 @@
         "title": "임시 상품 2"
     },
     {
-        "createdAt": 1697269004492,
         "description": "임시 상세 내용 3",
         "id": "3",
         "imageUrl": "https://loremflickr.com/300/300/3",
@@ -23,7 +21,6 @@
         "title": "임시 상품 3"
     },
     {
-        "createdAt": 1697355404492,
         "description": "임시 상세 내용 4",
         "id": "4",
         "imageUrl": "https://loremflickr.com/300/300/4",
@@ -31,7 +28,6 @@
         "title": "임시 상품 4"
     },
     {
-        "createdAt": 1697441804492,
         "description": "임시 상세 내용 5",
         "id": "5",
         "imageUrl": "https://loremflickr.com/300/300/5",
@@ -39,7 +35,6 @@
         "title": "임시 상품 5"
     },
     {
-        "createdAt": 1697528204492,
         "description": "임시 상세 내용 6",
         "id": "6",
         "imageUrl": "https://loremflickr.com/300/300/6",

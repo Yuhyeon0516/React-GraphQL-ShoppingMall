@@ -13,25 +13,59 @@ export default function CartList({ cartItems }: { cartItems: Cart[] }) {
 
     const checkboxRefs = cartItems.map(() => createRef<HTMLInputElement>());
 
-    function handleCheckboxChanged(e: SyntheticEvent) {
+    // function handleCheckboxChanged(e: SyntheticEvent) {
+    //     if (!formRef.current) return;
+
+    //     const targetInput = e.target as HTMLInputElement;
+    //     const data = new FormData(formRef.current);
+    //     const selectedItemCount = data.getAll('select-item').length;
+
+    //     if (targetInput.classList.contains('select-all')) {
+    //         const allChecked = targetInput.checked;
+    //         checkboxRefs.forEach((checkbox) => {
+    //             checkbox.current!.checked = allChecked;
+    //         });
+    //     } else {
+    //         const allChecked = selectedItemCount === cartItems.length;
+    //         formRef.current.querySelector<HTMLInputElement>('.select-all')!.checked = allChecked;
+    //     }
+
+    //     setFormData(data);
+    // }
+
+    const enabledItems = cartItems.filter((item) => item.product.createdAt);
+
+    const setAllCheckedFromItems = () => {
+        // 개별아이템 선택시
         if (!formRef.current) return;
-
-        const targetInput = e.target as HTMLInputElement;
         const data = new FormData(formRef.current);
-        const selectedItemCount = data.getAll('select-item').length;
+        const selectedCount = data.getAll('select-item').length;
+        const allChecked = selectedCount === enabledItems.length;
+        formRef.current.querySelector<HTMLInputElement>('.select-all')!.checked = allChecked;
+    };
 
-        if (targetInput.classList.contains('select-all')) {
-            const allChecked = targetInput.checked;
-            checkboxRefs.forEach((checkbox) => {
-                checkbox.current!.checked = allChecked;
+    const setItemsChckedFromAll = (targetInput: HTMLInputElement) => {
+        const allChecked = targetInput.checked;
+        checkboxRefs
+            .filter((inputElem) => {
+                return !inputElem.current!.disabled;
+            })
+            .forEach((inputElem) => {
+                inputElem.current!.checked = allChecked;
             });
-        } else {
-            const allChecked = selectedItemCount === cartItems.length;
-            formRef.current.querySelector<HTMLInputElement>('.select-all')!.checked = allChecked;
-        }
+    };
 
+    const handleCheckboxChanged = (e?: SyntheticEvent) => {
+        if (!formRef.current) return;
+        const targetInput = e?.target as HTMLInputElement;
+        if (targetInput && targetInput.classList.contains('select-all')) {
+            setItemsChckedFromAll(targetInput);
+        } else {
+            setAllCheckedFromItems();
+        }
+        const data = new FormData(formRef.current);
         setFormData(data);
-    }
+    };
 
     useEffect(() => {
         const checkedItems = checkboxRefs
