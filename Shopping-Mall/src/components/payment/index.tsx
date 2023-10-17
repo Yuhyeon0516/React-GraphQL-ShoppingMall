@@ -22,7 +22,6 @@ export default function Payment() {
 
     function proceed() {
         const payInfos = checkedCartData.map((item) => item.id);
-        console.log(payInfos);
         executePay(payInfos);
         setCheckedCartData([]);
         alert('결제가 완료되었습니다.');
