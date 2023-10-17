@@ -4,7 +4,6 @@ import lodash from 'lodash';
 
 export default function WillPay() {
     const checkedItems = useRecoilValue(checkedCartState);
-    console.log(checkedItems);
     const totalPrice = lodash.sum(checkedItems.map(({ amount, product: { price } }) => price * amount));
 
     return (

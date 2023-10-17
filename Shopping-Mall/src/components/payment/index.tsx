@@ -9,25 +9,20 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { graphqlFetcher } from '../../utils/queryClient';
 import { EXECUTE_PAY } from '../../graphql/payment';
-import { Paymentinfos } from '../../types/types';
 
 export default function Payment() {
     const navigate = useNavigate();
     const [checkedCartData, setCheckedCartData] = useRecoilState(checkedCartState);
     const [show, setShow] = useState(false);
-    const { mutate: executePay } = useMutation((payInfo: Paymentinfos) => graphqlFetcher(EXECUTE_PAY, { payInfo }));
+    const { mutate: executePay } = useMutation((ids: string[]) => graphqlFetcher(EXECUTE_PAY, { ids }));
 
     function showModal() {
         setShow(true);
     }
 
     function proceed() {
-        const payInfos = checkedCartData.map((item) => {
-            const { id } = item;
-            return {
-                id,
-            };
-        });
+        const payInfos = checkedCartData.map((item) => item.id);
+        console.log(payInfos);
         executePay(payInfos);
         setCheckedCartData([]);
         alert('결제가 완료되었습니다.');
@@ -37,7 +32,6 @@ export default function Payment() {
     function cancel() {
         setShow(false);
     }
-
     return (
         <div>
             {checkedCartData.map((cartItem, index) => {

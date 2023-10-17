@@ -27,9 +27,3 @@ export interface Cart {
     amount: number;
     product: Product;
 }
-
-export interface PayInfo {
-    id: string;
-}
-
-export type Paymentinfos = PayInfo[];
