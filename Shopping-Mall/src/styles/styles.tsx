@@ -239,3 +239,11 @@ export const ShowModalButton = styled.button`
     margin-left: 15px;
     cursor: pointer;
 `;
+
+// admin
+
+export const IconButton = styled(FontAwesomeIcon)`
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+`;

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {
-    AddCartButtonIcon,
+    IconButton,
     ProdcutItemText,
     ProductItemColumn,
     ProductItemContainer,
@@ -10,13 +10,9 @@ import {
     StyledLink,
 } from '../../styles/styles';
 import { Product } from '../../types/types';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { useMutation } from 'react-query';
-import { graphqlFetcher } from '../../utils/queryClient';
-import { ADD_CART } from '../../graphql/cart';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export default function ProductItem({ id, title, price, imageUrl, createdAt }: Product) {
-    const { mutate: addCart } = useMutation((id: string) => graphqlFetcher(ADD_CART, { id }));
+export default function AdminItem({ id, title, price, imageUrl, createdAt }: Product) {
     return (
         <ProductItemContainer>
             <StyledLink to={`/products/${id}`}>
@@ -38,7 +34,10 @@ export default function ProductItem({ id, title, price, imageUrl, createdAt }: P
                     </ProductItemColumn>
                 </ProductItemTextContainer>
             </StyledLink>
-            <AddCartButtonIcon icon={faCartShopping} onClick={() => addCart(id)} />
+            <div style={{ gap: 20, position: 'absolute', right: 10, bottom: 10, display: 'flex' }}>
+                <IconButton icon={faPencil} onClick={() => {}} color="#74a7fe" />
+                <IconButton icon={faTrash} onClick={() => {}} color="#ff8c82" />
+            </div>
         </ProductItemContainer>
     );
 }
