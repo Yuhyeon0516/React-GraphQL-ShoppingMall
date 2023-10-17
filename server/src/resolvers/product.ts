@@ -1,3 +1,5 @@
+import { Resolver } from './types';
+
 const mockProducts = (() =>
     Array.from({ length: 20 }).map((_, index) => ({
         id: index + 1 + '',
@@ -8,7 +10,7 @@ const mockProducts = (() =>
         createdAt: new Date(1697096204492 + index * 1000 * 60 * 60 * 24).toString(),
     })))();
 
-const productResolver = {
+const productResolver: Resolver = {
     Query: {
         products: (parent, args, context, info) => {
             return mockProducts;

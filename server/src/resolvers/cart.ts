@@ -1,3 +1,5 @@
+import { Resolver } from './types';
+
 let cartData = [
     { id: '1', amount: 1 },
     { id: '2', amount: 2 },
@@ -12,7 +14,7 @@ const mockProducts = (() =>
         createdAt: new Date(1697096204492 + index * 1000 * 60 * 60 * 24).toString(),
     })))();
 
-const cartResolver = {
+const cartResolver: Resolver = {
     Query: {
         cart: (parent, args, context, info) => {
             return cartData;
