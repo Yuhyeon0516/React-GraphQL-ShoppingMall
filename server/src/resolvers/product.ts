@@ -32,7 +32,6 @@ const productResolver: Resolver = {
             };
             db.products.push(newProduct);
             setJson(db.products);
-            console.log(db.products);
 
             return newProduct;
         },
