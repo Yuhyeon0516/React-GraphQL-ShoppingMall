@@ -21,7 +21,7 @@ export const getClient = (() => {
     };
 })();
 
-const BASE_URL = 'https://api.escuelajs.co/api/v1';
+const BASE_URL = 'https://localhost:8000/graphql';
 
 export async function fetcher({ method, path, body, params }: FetcherPropsType) {
     try {
@@ -50,7 +50,7 @@ export async function fetcher({ method, path, body, params }: FetcherPropsType) 
     }
 }
 
-const GRAPHQL_BASE_URL = '/';
+const GRAPHQL_BASE_URL = 'http://localhost:8000/graphql';
 
 export async function graphqlFetcher<T>(query: RequestDocument, variables = {}) {
     return request<T>(GRAPHQL_BASE_URL, query, variables);
