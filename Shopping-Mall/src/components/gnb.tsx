@@ -16,6 +16,9 @@ export default function Gnb() {
                 <li>
                     <StyledLink to={'/payment'}>결제</StyledLink>
                 </li>
+                <li>
+                    <StyledLink to={'/admin'}>어드민</StyledLink>
+                </li>
             </ul>
         </nav>
     );

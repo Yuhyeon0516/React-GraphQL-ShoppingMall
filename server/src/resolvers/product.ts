@@ -8,10 +8,11 @@ function setJson(data: Products) {
 
 const productResolver: Resolver = {
     Query: {
-        products: (parent, { cursor = '' }, { db }) => {
-            const fromnIndex = db.products.findIndex((product) => product.id === cursor) + 1;
+        products: (parent, { cursor = '', showDeleted = false }, { db }) => {
+            const filteredDB = showDeleted ? db.products : db.products.filter((product) => product.createdAt);
+            const fromnIndex = filteredDB.findIndex((product) => product.id === cursor) + 1;
 
-            return db.products.splice(fromnIndex, fromnIndex + 15) || [];
+            return filteredDB.splice(fromnIndex, fromnIndex + 15) || [];
         },
         product: (parent, { id }, { db }) => {
             const found = db.products.find((item) => item.id === id);
