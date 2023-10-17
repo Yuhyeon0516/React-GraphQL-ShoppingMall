@@ -10,8 +10,12 @@ export default function PaymentModal({ show, proceed, cancel }: { show: boolean;
             <div>
                 <p>정말 결제 할까요?</p>
                 <div>
-                    <button onClick={proceed}>예</button>
-                    <button onClick={cancel}>아니오</button>
+                    <button onClick={proceed} style={{ cursor: 'pointer' }}>
+                        예
+                    </button>
+                    <button onClick={cancel} style={{ cursor: 'pointer' }}>
+                        아니오
+                    </button>
                 </div>
             </div>
         </ModalPortal>
