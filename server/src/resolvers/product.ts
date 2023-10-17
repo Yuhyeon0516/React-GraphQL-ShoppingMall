@@ -6,7 +6,7 @@ const productResolver: Resolver = {
             return db.products;
         },
         product: (parent, { id }, { db }) => {
-            const found = db.products.find((item: any) => item.id === id);
+            const found = db.products.find((item) => item.id === id);
             if (found) return found;
             return null;
         },
