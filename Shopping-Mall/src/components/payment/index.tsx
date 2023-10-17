@@ -30,6 +30,7 @@ export default function Payment() {
         });
         executePay(payInfos);
         setCheckedCartData([]);
+        alert('결제가 완료되었습니다.');
         navigate('/products', { replace: true });
     }
 
