@@ -2,12 +2,18 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import schema from './schema/index';
 import resolver from './resolvers/index';
+import { DBField, readDB } from './dbController';
 
 (async () => {
     const server = new ApolloServer({
         typeDefs: schema,
         resolvers: resolver,
-        // context: {},
+        context: {
+            db: {
+                products: readDB(DBField.PRODUCTS),
+                cart: readDB(DBField.CART),
+            },
+        },
     });
 
     const app = express();
@@ -16,7 +22,7 @@ import resolver from './resolvers/index';
         app,
         path: '/graphql',
         cors: {
-            origin: ['http://localhost:3000'],
+            origin: ['http://localhost:3000', 'https://studio.apollographql.com'],
             credentials: true,
         },
     });
