@@ -237,4 +237,5 @@ export const ShowModalButton = styled.button`
     padding: 10px;
     border-radius: 15px;
     margin-left: 15px;
+    cursor: pointer;
 `;
