@@ -24,14 +24,6 @@ export interface Products {
 
 export interface Cart {
     id: string;
-    imageUrl: string;
-    price: number;
-    title: string;
     amount: number;
+    product: Product;
 }
-
-export interface PayInfo {
-    id: string;
-}
-
-export type Paymentinfos = PayInfo[];

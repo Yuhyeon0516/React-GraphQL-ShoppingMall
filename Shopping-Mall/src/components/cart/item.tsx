@@ -6,7 +6,7 @@ import { ForwardedRef, SyntheticEvent, forwardRef } from 'react';
 import { CartItemContainer, CartItemImage, CartItemRemoveIcon, CartItemTextContainer, CartItemType } from '../../styles/styles';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-function CartItem({ id, title, price, amount, imageUrl }: Cart, ref: ForwardedRef<HTMLInputElement>) {
+function CartItem({ id, amount, product: { title, price, imageUrl } }: Cart, ref: ForwardedRef<HTMLInputElement>) {
     const queryClient = getClient();
     const { mutate: updateCart } = useMutation(({ id, amount }: { id: string; amount: number }) => graphqlFetcher(UPDATE_CART, { id, amount }));
     const { mutate: deleteCart } = useMutation(({ id }: { id: string }) => graphqlFetcher(DELETE_CART, { id }));
@@ -18,7 +18,15 @@ function CartItem({ id, title, price, amount, imageUrl }: Cart, ref: ForwardedRe
             { id, amount: value },
             {
                 onSuccess: (newValue) => {
-                    queryClient.setQueryData(QueryKeys.CART, newValue);
+                    const prevCart = queryClient.getQueryData<{ cart: Cart[] }>(QueryKeys.CART);
+                    const targetIndex = prevCart?.cart.findIndex((cartItem) => cartItem.id === id);
+                    if (!prevCart || targetIndex === undefined || targetIndex < 0) return;
+
+                    const newCart = newValue as { updateCart: Cart };
+                    const updateCart = [...prevCart.cart];
+                    updateCart.splice(targetIndex, 1, newCart.updateCart);
+
+                    queryClient.setQueryData(QueryKeys.CART, { cart: updateCart });
                 },
             },
         );
@@ -29,7 +37,17 @@ function CartItem({ id, title, price, amount, imageUrl }: Cart, ref: ForwardedRe
             { id },
             {
                 onSuccess: (newValue) => {
-                    queryClient.setQueryData(QueryKeys.CART, newValue);
+                    const prevCart = queryClient.getQueryData<{ cart: Cart[] }>(QueryKeys.CART);
+                    const removeCart = newValue as { deleteCart: string };
+                    if (!prevCart) return;
+
+                    const targetIndex = prevCart.cart.findIndex((cartItem) => cartItem.id === removeCart.deleteCart);
+                    if (targetIndex < 0) return;
+
+                    const newCart = [...prevCart.cart];
+                    newCart.splice(targetIndex, 1);
+
+                    queryClient.setQueryData(QueryKeys.CART, { cart: newCart });
                 },
             },
         );

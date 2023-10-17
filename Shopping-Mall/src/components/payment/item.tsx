@@ -1,7 +1,7 @@
 import { CartItemContainer, CartItemImage, CartItemTextContainer, CartItemType } from '../../styles/styles';
 import { Cart } from '../../types/types';
 
-export default function PaymentItem({ title, price, amount, imageUrl, index }: Cart & { index: number }) {
+export default function PaymentItem({ product: { title, price, imageUrl }, amount, index }: Cart & { index: number }) {
     return (
         <CartItemContainer>
             <div style={{ marginLeft: 20 }}>{index + 1}</div>
