@@ -1,4 +1,4 @@
-import { DocumentData, collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { DocumentData, addDoc, collection, doc, getDoc, getDocs, increment, query, updateDoc, where } from 'firebase/firestore';
 import { DBField, writeDB } from '../dbController';
 import { Cart, CartItem, Resolver } from './types';
 import { db } from '../../firebase';
@@ -24,31 +24,37 @@ const cartResolver: Resolver = {
         },
     },
     Mutation: {
-        addCart: (parent, { id }, { db }) => {
+        addCart: async (parent, { id }) => {
             if (!id) throw Error('상품 아이디가 없습니다.');
-            const targetProduct = db.products.find((item) => item.id === id);
-            if (!targetProduct) throw Error('상품이 없습니다.');
+            const productRef = doc(db, 'products', id);
+            const cartCollection = collection(db, 'cart');
+            const exist = (await getDocs(query(cartCollection, where('product', '==', productRef)))).docs[0];
 
-            const existCartIndex = db.cart.findIndex((item) => item.id === id);
-
-            if (existCartIndex > -1) {
-                const newCartItem: CartItem = {
-                    id,
-                    amount: db.cart[existCartIndex].amount + 1,
-                };
-                db.cart.splice(existCartIndex, 1, newCartItem);
-                setJson(db.cart);
-                return newCartItem;
+            let cartRef;
+            if (exist) {
+                cartRef = doc(db, 'cart', exist.id);
+                await updateDoc(cartRef, {
+                    amount: increment(1),
+                });
+            } else {
+                cartRef = await addDoc(cartCollection, {
+                    amount: 1,
+                    product: productRef,
+                });
             }
 
-            const newItem: CartItem = {
-                id,
-                amount: 1,
-            };
+            const snapshot = await getDoc(cartRef);
+            const data = snapshot.data() as any;
 
-            db.cart.push(newItem);
-            setJson(db.cart);
-            return newItem;
+            console.log({
+                id: snapshot.id,
+                ...data,
+            });
+
+            return {
+                id: snapshot.id,
+                ...data,
+            };
         },
         updateCart: (parent, { id, amount }, { db }) => {
             const existCartIndex = db.cart.findIndex((item) => item.id === id);
@@ -82,7 +88,7 @@ const cartResolver: Resolver = {
     },
     CartItem: {
         product: async (cartItem, args) => {
-            const product = await getDoc(cartItem.productId);
+            const product = await getDoc(cartItem.product);
             const data = product.data() as any;
 
             return {
