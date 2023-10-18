@@ -6,6 +6,7 @@ import {
     DocumentData,
     addDoc,
     collection,
+    deleteDoc,
     doc,
     getDoc,
     getDocs,
@@ -83,17 +84,11 @@ const productResolver: Resolver = {
                 ...newData,
             };
         },
-        deleteProduct: (parent, { id }, { db }) => {
-            const existProductIndex = db.products.findIndex((item) => item.id === id);
+        deleteProduct: async (parent, { id }) => {
+            const productRef = doc(db, 'products', id);
+            if (!productRef) throw new Error('없는 상품입니다.');
+            await updateDoc(productRef, { createdAt: null });
 
-            if (existProductIndex < 0) throw new Error('없는 상품입니다.');
-            const updatedItem = {
-                ...db.products[existProductIndex],
-            };
-
-            delete updatedItem.createdAt;
-            db.products.splice(existProductIndex, 1, updatedItem);
-            setJson(db.products);
             return id;
         },
     },
