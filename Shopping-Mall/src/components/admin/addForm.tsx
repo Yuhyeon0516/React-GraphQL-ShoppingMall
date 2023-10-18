@@ -1,6 +1,6 @@
 import { SyntheticEvent } from 'react';
 import { useMutation } from 'react-query';
-import { graphqlFetcher } from '../../utils/queryClient';
+import { QueryKeys, getClient, graphqlFetcher } from '../../utils/queryClient';
 import { Product } from '../../types/types';
 import { ADD_PRODUCT } from '../../graphql/products';
 import arrToObj from '../../utils/arrToObj';
@@ -8,19 +8,27 @@ import arrToObj from '../../utils/arrToObj';
 type OmitProduct = Omit<Product, 'id' | 'createdAt'>;
 
 export default function AddForm() {
+    const queryClient = getClient();
     const { mutate: addProduct } = useMutation(({ title, imageUrl, price, description }: OmitProduct) =>
         graphqlFetcher(ADD_PRODUCT, { title, imageUrl, price, description }),
     );
 
-    function handleSubmit(e: SyntheticEvent) {
+    async function handleSubmit(e: SyntheticEvent) {
         e.preventDefault();
         const formData = arrToObj([...new FormData(e.target as HTMLFormElement)]);
         formData.price = Number(formData.price);
-        addProduct(formData as OmitProduct);
+        await addProduct(formData as OmitProduct);
+        queryClient.invalidateQueries(QueryKeys.PRODUCTS, {
+            exact: false,
+            refetchInactive: false,
+        });
+
+        const form = document.getElementById('form') as HTMLFormElement;
+        form.reset();
     }
 
     return (
-        <form style={{ marginBottom: 20, gap: 25, display: 'flex' }} onSubmit={handleSubmit}>
+        <form id="form" style={{ marginBottom: 20, gap: 25, display: 'flex' }} onSubmit={handleSubmit}>
             <label>
                 상품명: <input name="title" type="text" />
             </label>
