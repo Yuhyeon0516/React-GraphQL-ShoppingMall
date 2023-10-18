@@ -1,4 +1,4 @@
-import { DocumentData, addDoc, collection, doc, getDoc, getDocs, increment, query, updateDoc, where } from 'firebase/firestore';
+import { DocumentData, addDoc, collection, deleteDoc, doc, getDoc, getDocs, increment, query, updateDoc, where } from 'firebase/firestore';
 import { DBField, writeDB } from '../dbController';
 import { Cart, CartItem, Resolver } from './types';
 import { db } from '../../firebase';
@@ -73,13 +73,11 @@ const cartResolver: Resolver = {
                 ...data,
             };
         },
-        deleteCart: (parent, { id }, { db }) => {
-            const existCartIndex = db.cart.findIndex((item) => item.id === id);
+        deleteCart: async (parent, { id }) => {
+            const cartRef = doc(db, 'cart', id);
+            if (!cartRef) throw Error('장바구니에 없는 항목입니다.');
+            await deleteDoc(cartRef);
 
-            if (existCartIndex < 0) throw new Error('없는 데이터입니다.');
-
-            db.cart.splice(existCartIndex, 1);
-            setJson(db.cart);
             return id;
         },
         executePay: (parent, { ids }, { db }, info) => {
