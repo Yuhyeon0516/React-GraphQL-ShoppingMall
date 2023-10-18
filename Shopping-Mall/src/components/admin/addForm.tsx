@@ -31,7 +31,7 @@ export default function AddForm() {
                 상품가격: <input name="price" type="number" min={1000} />
             </label>
             <label>
-                상품명: <input name="description" type="text" />
+                상품설명: <input name="description" type="text" />
             </label>
             <button type="submit">등록</button>
         </form>

@@ -40,23 +40,25 @@ export const ProductItemContainer = styled.div`
     border: 3px solid #65ceb0;
     border-radius: 20px;
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
     padding: 10px;
     position: relative;
 `;
 
 export const ProductItemImage = styled.img`
-    width: 90%;
+    width: 300px;
+    height: 300px;
     align-self: center;
     border-radius: 20px;
-    overflow: hidden;
+    object-fit: cover;
 `;
 
 export const ProductItemTextContainer = styled.div`
+    width: 80%;
     display: flex;
-    flex: 1;
     flex-direction: column;
+    align-self: center;
     gap: 5px;
     margin-top: 20px;
     margin-left: 20px;
@@ -198,6 +200,7 @@ export const CartItemRemoveIcon = styled(FontAwesomeIcon)`
     align-self: center;
     width: 30px;
     height: 30px;
+    cursor: pointer;
 `;
 
 export const LinkColorButton = styled(Link)`
