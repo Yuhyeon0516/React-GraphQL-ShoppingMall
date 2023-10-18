@@ -46,28 +46,32 @@ const cartResolver: Resolver = {
             const snapshot = await getDoc(cartRef);
             const data = snapshot.data() as any;
 
-            console.log({
-                id: snapshot.id,
-                ...data,
-            });
-
             return {
                 id: snapshot.id,
                 ...data,
             };
         },
-        updateCart: (parent, { id, amount }, { db }) => {
-            const existCartIndex = db.cart.findIndex((item) => item.id === id);
+        updateCart: async (parent, { id, amount }) => {
+            if (amount < 1) throw Error('수량을 1 이하로 변경할 수 없습니다.');
+            if (!id) throw Error('상품 아이디가 없습니다.');
+            const productRef = doc(db, 'products', id);
+            const cartCollection = collection(db, 'cart');
+            const exist = (await getDocs(query(cartCollection, where('product', '==', productRef)))).docs[0];
+            if (!exist) throw Error('장바구니에 없는 항목입니다.');
 
-            if (existCartIndex < 0) throw new Error('없는 데이터입니다.');
+            const cartRef = doc(db, 'cart', exist.id);
 
-            const newCartItem: CartItem = {
-                id,
-                amount,
+            await updateDoc(cartRef, {
+                amount: amount,
+            });
+
+            const snapshot = await getDoc(cartRef);
+            const data = snapshot.data() as any;
+
+            return {
+                id: snapshot.id,
+                ...data,
             };
-            db.cart.splice(existCartIndex, 1, newCartItem);
-            setJson(db.cart);
-            return newCartItem;
         },
         deleteCart: (parent, { id }, { db }) => {
             const existCartIndex = db.cart.findIndex((item) => item.id === id);
