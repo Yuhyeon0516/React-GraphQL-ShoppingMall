@@ -80,12 +80,23 @@ const cartResolver: Resolver = {
 
             return id;
         },
-        executePay: (parent, { ids }, { db }, info) => {
-            const newCartData = db.cart.filter((cartItem) => !ids.includes(cartItem.id));
+        executePay: async (parent, { ids }) => {
+            const deletedId = [];
+            for await (const id of ids) {
+                const cartRef = doc(db, 'cart', id);
+                const cartSnapshot = await getDoc(cartRef);
+                const cart = cartSnapshot.data() as any;
+                const productRef = cart.product;
+                if (!productRef) throw Error('상품 정보가 없습니다.');
+                const productSnapshot = await getDoc(productRef);
+                const product = productSnapshot.data() as any;
+                if (product.createdAt) {
+                    await deleteDoc(cartRef);
+                    deletedId.push(id);
+                }
+            }
 
-            db.cart = newCartData;
-            setJson(db.cart);
-            return ids;
+            return deletedId;
         },
     },
     CartItem: {
