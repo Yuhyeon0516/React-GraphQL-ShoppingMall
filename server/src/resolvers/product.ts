@@ -1,6 +1,10 @@
 import { v4 } from 'uuid';
 import { Product, Products, Resolver } from './types';
 import { DBField, writeDB } from '../dbController';
+import { db } from '../../firebase';
+import { DocumentData, collection, doc, getDoc, getDocs, limit, orderBy, query, startAfter, where } from 'firebase/firestore';
+
+const PAGE_SIZE = 15;
 
 function setJson(data: Products) {
     writeDB(DBField.PRODUCTS, data);
@@ -8,16 +12,30 @@ function setJson(data: Products) {
 
 const productResolver: Resolver = {
     Query: {
-        products: (parent, { cursor = '', showDeleted = false }, { db }) => {
-            const filteredDB = showDeleted ? db.products : db.products.filter((product) => product.createdAt);
-            const fromIndex = filteredDB.findIndex((product) => product.id === cursor) + 1;
+        products: async (parent, { cursor = '', showDeleted = false }) => {
+            const products = collection(db, 'products');
+            const queryOptions: any[] = [orderBy('createdAt', 'desc')];
+            if (cursor) queryOptions.push(startAfter(cursor));
+            if (!showDeleted) queryOptions.unshift(where('createdAt', '!=', null));
+            const q = query(products, ...queryOptions, limit(PAGE_SIZE));
 
-            return filteredDB.slice(fromIndex, fromIndex + 15) || [];
+            const snapshot = await getDocs(q);
+            const data: DocumentData[] = [];
+            snapshot.forEach((doc) =>
+                data.push({
+                    id: doc.id,
+                    ...doc.data(),
+                }),
+            );
+
+            return data;
         },
-        product: (parent, { id }, { db }) => {
-            const found = db.products.find((item) => item.id === id);
-            if (found) return found;
-            return null;
+        product: async (parent, { id }) => {
+            const snapshot = await getDoc(doc(db, 'products', id));
+            return {
+                ...snapshot.data(),
+                id: snapshot.id,
+            };
         },
     },
     Mutation: {
