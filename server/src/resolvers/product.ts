@@ -2,7 +2,21 @@ import { v4 } from 'uuid';
 import { Product, Products, Resolver } from './types';
 import { DBField, writeDB } from '../dbController';
 import { db } from '../../firebase';
-import { DocumentData, addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, startAfter, where } from 'firebase/firestore';
+import {
+    DocumentData,
+    addDoc,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    limit,
+    orderBy,
+    query,
+    serverTimestamp,
+    startAfter,
+    updateDoc,
+    where,
+} from 'firebase/firestore';
 
 const PAGE_SIZE = 15;
 
@@ -56,18 +70,18 @@ const productResolver: Resolver = {
                 ...snapshot.data(),
             };
         },
-        updateProduct: (parent, { id, ...data }, { db }) => {
-            const existProductIndex = db.products.findIndex((item) => item.id === id);
+        updateProduct: async (parent, { id, ...data }) => {
+            const productRef = doc(db, 'products', id);
+            if (!productRef) throw new Error('없는 상품입니다.');
 
-            if (existProductIndex < 0) throw new Error('없는 상품입니다.');
-            const updatedItem = {
-                ...db.products[existProductIndex],
-                ...data,
+            await updateDoc(productRef, data);
+            const snapshot = await getDoc(productRef);
+            const newData = snapshot.data() as any;
+
+            return {
+                id: snapshot.id,
+                ...newData,
             };
-            db.products.splice(existProductIndex, 1, updatedItem);
-            setJson(db.products);
-
-            return updatedItem;
         },
         deleteProduct: (parent, { id }, { db }) => {
             const existProductIndex = db.products.findIndex((item) => item.id === id);
