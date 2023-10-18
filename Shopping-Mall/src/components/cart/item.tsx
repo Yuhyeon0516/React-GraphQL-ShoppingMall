@@ -55,9 +55,6 @@ function CartItem({ id, amount, product: { title, price, imageUrl, createdAt } }
 
     return (
         <CartItemContainer>
-            {/* <div style={{ display: 'flex', width: 40, height: 40, alignItems: 'center', justifyContent: 'center' }}>
-                {createdAt ? <input type="checkbox" name={`select-item`} className="cart-item__checkbox" ref={ref} /> : null}
-            </div> */}
             <input type="checkbox" name={`select-item`} className="cart-item__checkbox" ref={ref} disabled={createdAt === null} />
             <CartItemImage src={imageUrl} alt="image" />
             <CartItemTextContainer>
